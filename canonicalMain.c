@@ -15,10 +15,10 @@ int enableRawMode(){
 	struct termios raw = &saveInput;
 	RAW.C_iflag &= ~(IXON);
 	raw.c_lflag &= ~(ECHO | ICANON | SIGINT | SIGTSTP | IEXTEN);
+	//this is the not the input flag like the one above since it does not take in any sort of inputs of the command controls
 	//disable the echo command
 	tcsetattr(STDIN_FILEIN, TCSANOW, &raw);
-}
-int main(){
+}int main(){
 	enableRawMode();
 	char *c;
 	while(read(STDIN_FILENO, &c, 1) != 0  && c != 'q');
